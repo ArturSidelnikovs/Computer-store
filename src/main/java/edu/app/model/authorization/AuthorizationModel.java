@@ -1,11 +1,9 @@
-package edu.app.model.user_model;
-
-import edu.app.model.AbstractModel;
+package edu.app.model.authorization;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class UserModel extends AbstractModel {
+public class AuthorizationModel implements Serializable {
 
     @NotBlank
     private String firstName;
@@ -14,7 +12,17 @@ public class UserModel extends AbstractModel {
     @NotBlank
     private String login;
     @NotBlank
-    private LocalDate createdOn;
+    private String password;
+
+
+    public static AuthorizationModel fromLogin(String username) {
+        AuthorizationModel newUser = new AuthorizationModel();
+        newUser.setFirstName(username);
+        newUser.setLastName(username);
+        newUser.setLogin(username);
+        newUser.setPassword(username);
+        return newUser;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -40,11 +48,12 @@ public class UserModel extends AbstractModel {
         this.login = login;
     }
 
-    public LocalDate getCreatedOn() {
-        return createdOn;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCreatedOn(LocalDate createdOn) {
-        this.createdOn = createdOn;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 }
