@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum RoleEnum {
-    USER (Arrays.asList(AccessForRoles.READ_ONLY)),
-    ADMIN (Arrays.asList(AccessForRoles.READ_ONLY, AccessForRoles.WRITE_ONLY));
+    USER (Arrays.asList(AccessForRoles.READ)),
+    ADMIN (Arrays.asList(AccessForRoles.READ, AccessForRoles.WRITE));
 
     private final List <AccessForRoles> accesses;
 

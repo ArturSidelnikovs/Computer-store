@@ -1,4 +1,4 @@
-package edu.app.Initialization;
+package edu.app.initialization;
 
 import edu.app.model.role.RoleEnum;
 import edu.app.model.user.User;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class InitUser {
+public class UserInitializer {
 
-    private final IUserService<User> serviceUser;
+    private final IUserService<User> userService;
 
 
-    public InitUser(IUserService<User> serviceUser) {
-        this.serviceUser = serviceUser;
+    public UserInitializer(IUserService<User> serviceUser) {
+        this.userService = serviceUser;
     }
 
     public void InitUsers (ConfigurableApplicationContext context) {
@@ -33,8 +33,8 @@ public class InitUser {
         admin.setPassword(encoder.encode("admin"));
         admin.setCreatedOn(new Date());
 
-        serviceUser.save(user);
-        serviceUser.save(admin);
+        userService.save(user);
+        userService.save(admin);
 
     }
 }

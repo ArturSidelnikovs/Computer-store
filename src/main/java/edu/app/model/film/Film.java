@@ -6,6 +6,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -27,21 +29,26 @@ public class Film implements Serializable {
     @GenericGenerator(name = "increment", strategy = "increment")
     Long id;
 
-    @Size(min = 2, max = 50)
+    @Size(min = 1, max = 50)
     @NotEmpty(message = "Film name should not be empty")
     private String name;
 
-    @Size(min = 2, max = 50)
-    private String ganre;
+    @Size(min = 5, max = 50)
+    private String genre;
 
-    @Size(min = 2, max = 50)
-    private String FilmDirector;
+    @Size(min = 5, max = 50)
+    private String filmDirector;
 
     @ElementCollection
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<String> images = new ArrayList<>();
+    private List<String> imageUrls = new ArrayList<>();
 
     public Film() { }
+
+    public void addImage(Film film, String imgLink) {
+        film.getImageUrls().add(imgLink);
+    }
+
 
 
 }

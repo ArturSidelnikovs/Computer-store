@@ -1,6 +1,6 @@
-package edu.app.controllers;
+package edu.app.controller;
 
-import edu.app.configurations.security.SecurityUser;
+import edu.app.configuration.security.SecurityUser;
 import edu.app.model.user.User;
 import edu.app.service.user_service.IUserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,13 +32,13 @@ public class LoginController {
 
     @GetMapping ("/login")
    public String login () {
-        return "login/Login";
+        return "login/login";
     }
 
     @GetMapping ("/registration")
     public String registration (Model model) {
         model.addAttribute("User", new User());
-        return "registration/Registration";
+        return "registration/registration";
     }
 
 

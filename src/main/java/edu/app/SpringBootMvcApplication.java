@@ -1,5 +1,5 @@
 package edu.app;
-import edu.app.Initialization.InitDataBase;
+import edu.app.initialization.DBInitializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -14,8 +14,8 @@ public class SpringBootMvcApplication extends SpringBootServletInitializer {
     }
 
     private static void initDatabase(ConfigurableApplicationContext context) {
-        InitDataBase initDataBase = context.getBean(InitDataBase.class);
-        initDataBase.initDb(context);
+        DBInitializer DBInitializer = context.getBean(DBInitializer.class);
+        DBInitializer.initDb(context);
     }
 }
 

@@ -1,0 +1,101 @@
+body:not(.container) {
+    background-color: #e3e3e3;
+}
+
+.container {
+    background-color: white;
+}
+
+td {
+    font-size: 40px;
+}
+
+#headerProfile {
+    margin-top: 100px;
+    margin-left: 30px;
+}
+
+#profileWithAvatar, #profileUnknown {
+    border-radius: 50%;
+}
+
+
+#profileUserName {
+    float: left;
+    margin-left: 80px;
+    margin-top: 170px;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+#creationDateProfile {
+    opacity: .8;
+    font-size: 15px;
+    margin-bottom: 30px;
+    margin-left: 60px;
+}
+
+.inf {
+    font-size: 20px;
+    opacity: .8;
+}
+
+.descriptionProfile {
+    font-size: 20px;
+}
+
+#updateImage {
+    width: 600px;
+}
+
+#updateAvatarInput {
+    display: none;
+    /*width: 210px;*/
+    /*margin-left: 30px;*/
+}
+
+#updateAvatarInput + label {
+    background-color: crimson;
+    padding: 8px;
+    color: #e3e3e3;
+    border: 2px solid indianred;
+    border-radius: 9px;
+    margin-left: 50px;
+}
+
+#updateAvatarInput + label:hover {
+    background-color: brown;
+    border-color: chocolate;
+    cursor: pointer;
+}
+
+#chosenFile {
+    margin-left: 50px;
+}
+
+
+#submitForAvatar {
+    margin-bottom: 3px;
+    margin-left: 20px;
+}
+
+.inline, .inline #submitForAvatar {
+    display: inline-block;
+}
+
+#editHref {
+    font-size: 25px;
+}
+
+#bottomRow {
+    padding-bottom: 210px;
+    margin-left: 30px;
+}
+
+#avatarRow, #idRow {
+    background-color: lightgoldenrodyellow;
+}
+
+#editColumn {
+    margin-top: 80px;
+}

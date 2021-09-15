@@ -1,7 +1,7 @@
-package edu.app.configurations.security;
+package edu.app.configuration.security;
 
 import edu.app.model.user.User;
-import edu.app.repository.user_repository.UserRepository;
+import edu.app.repository.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

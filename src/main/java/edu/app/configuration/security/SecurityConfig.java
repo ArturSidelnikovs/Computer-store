@@ -1,4 +1,4 @@
-package edu.app.configurations.security;
+package edu.app.configuration.security;
 
 import edu.app.model.role.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;

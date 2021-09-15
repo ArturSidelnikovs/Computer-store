@@ -1,5 +1,4 @@
 package edu.app.model.user;
-import edu.app.model.order.Order;
 import edu.app.model.role.RoleEnum;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,9 +7,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -45,7 +43,13 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Order> orderModels = new ArrayList<>();
+
+    @Lob
+    private byte[] avatar;
+
+    public String getAvatarData(byte[] byteDate) {
+        return Base64.getMimeEncoder().encodeToString(byteDate);
+    }
 
     public User(String userName, String password, long id) {
         this.id = id;

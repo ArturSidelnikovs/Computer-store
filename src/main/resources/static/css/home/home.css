@@ -1,0 +1,37 @@
+body:not(.container) {
+    background-color: #e3e3e3;
+}
+
+.container {
+    background-color: white;
+}
+section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.carousel-control-prev .carousel-control-prev-icon {
+    background-image: url("");
+}
+
+.carousel-control-next .carousel-control-next-icon {
+    background-image: url("");
+}
+
+.carousel-control-next, .carousel-control-prev {
+    width: 20px;
+}
+
+#prev {
+    left: -130px;
+}
+
+#next {
+    right: -130px;
+}
+.titleCard{
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    color: gray;
+}

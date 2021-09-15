@@ -1,7 +1,8 @@
 package edu.app.service.user_service;
 
+import edu.app.model.film.Film;
 import edu.app.model.user.User;
-import edu.app.repository.user_repository.UserRepository;
+import edu.app.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class UserService implements IUserService <User> {
 
     private UserRepository userRepository;
+    Film film;
 
     public UserService (UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -22,7 +24,9 @@ public class UserService implements IUserService <User> {
     public User findById(long id) {
         User user = userRepository.findById(id).orElse(null);
         return user;
+
     }
+
 
     @Override
     public List<User> findAll() {

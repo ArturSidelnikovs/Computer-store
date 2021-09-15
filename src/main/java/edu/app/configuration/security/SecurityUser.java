@@ -1,4 +1,4 @@
-package edu.app.configurations.security;
+package edu.app.configuration.security;
 
 import edu.app.model.user.User;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SecurityUser implements UserDetails {
+
 
     private final User user;
     private static final Logger logger = (Logger) LoggerFactory.getLogger(SecurityUser.class);
@@ -63,4 +64,6 @@ public class SecurityUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User getUser() { return user;}
 }

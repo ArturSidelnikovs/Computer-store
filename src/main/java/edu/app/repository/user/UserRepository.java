@@ -1,4 +1,4 @@
-package edu.app.repository.user_repository;
+package edu.app.repository.user;
 
 
 import edu.app.model.user.User;

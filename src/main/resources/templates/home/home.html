@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>Films</title>
+  <link rel="stylesheet" th:href="@{/css/home/home.css}"/>
+</head>
+
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <section>
+    <div class="container-xxl">
+      <div class="row align-items-center">
+        <div class="col-7">
+          <h1>Nice to meet you </h1>
+        </div>
+        <div class="col-5">
+          <img class="w-100"
+               src="https://cdn1.expertreviews.co.uk/sites/expertreviews/files/2020/03/the-best-films-on-now-tv-sky-cinema.jpg"
+               alt="Films">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-xxl">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row justify-content-between">
+              <th:block th:each="film:${itemActive}">
+                <div class="col">
+                  <div class="card w-100">
+                    <a th:href="@{/film/{id}(id=${film.getId()})}">
+                      <img th:src="@{${film.getImageUrls()}}"
+                           class="card-img-top" alt="carouselItem">
+                    </a>
+                    <div class="card-body">
+                      <a th:href="@{/film/{id}(id=${film.getId()})}" class="titleCard"
+                         th:text="${film.getName()}">name</a>
+                      <br/>
+                      <span class="card-text"
+                            th:text="${film.getGenre()}"></span>
+                      <br/>
+                      <span class="card-text"
+                            th:text="${film.getFilmDirector()}"></span>
+                    </div>
+                  </div>
+                </div>
+              </th:block>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row justify-content-between">
+              <th:block th:each="film:${item}">
+                <div class="col">
+                  <div class="card w-100 ">
+                    <a th:href="@{/films/{id}(id=${film.getId()})}">
+                      <img th:src="@{${film.getImageUrls()}}"
+                           class="card-img-top" alt="carouselItem">
+                    </a>
+                    <div class="card-body">
+                      <a th:href="@{/films/{id}(id=${film.getId()})}"
+                         class="titleCard" th:text="${film.getName()}">name</a>
+                      <br/>
+                      <span class="card-text"
+                            th:text="${film.getGenre()}"></span>
+                      <br/>
+                      <span class="card-text"
+                            th:text="${film.getFilmDirector()}"></span>
+                    </div>
+                  </div>
+                </div>
+              </th:block>
+            </div>
+          </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev" id="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next" id="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+<footer id="footer" th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

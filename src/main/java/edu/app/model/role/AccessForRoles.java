@@ -2,8 +2,8 @@ package edu.app.model.role;
 
 public enum AccessForRoles {
 
-    READ_ONLY("read:only"),
-    WRITE_ONLY ("write:only");
+    READ("read:only"),
+    WRITE("write:only");
 
     private final String  access;
 

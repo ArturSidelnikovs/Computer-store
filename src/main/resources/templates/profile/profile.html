@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" th:href="@{/css/profile/profile.css}">
+</head>
+
+<body>
+<div class="container">
+<div class="row row-cols-auto" id="idRow">
+  <div class="col" id="headerProfile">
+    <img th:if="${#authentication.getPrincipal().getUser().getAvatar()==null}"
+         th:src="@{/img/profile/unknownUser.jpg}" class="float-start"
+         alt="profileImg" id="profileUnknown" width="200" height="200">
+    <img th:unless="${#authentication.getPrincipal().getUser().getAvatar()==null}"
+         th:src="'data:image/png;base64,'+${#authentication.getPrincipal().getUser().getAvatarData
+                 (#authentication.getPrincipal().getUser().getAvatar())}"
+         class="float-start" alt="profileImg" id="profileWithAvatar" width="200" height="200">
+    <span th:text="${#authentication.getName()}" id="profileUserName">  </span>
+  </div>
+</div>
+  <div class="row row-cols-auto" id="avatarRow">
+    <div class="col">
+      <form id="updateImage" class="inline" th:method="PUT"
+            th:action="@{/profile/{id}(id=${#authentication.getPrincipal().getUser().getId()})}"
+            enctype="multipart/form-data">
+        <input type="file" name="file" id="updateAvatarInput" placeholder="Image" class="inline">
+        <label for="updateAvatarInput"> Choose a file</label>
+        <span class="inline" id="creationDateProfile"
+              th:text="'MobileShop ID:'+${#authentication.getPrincipal().getUser().getId()} +' &#8729 from ' +
+${#dates.format(#authentication.getPrincipal().getUser().getCreatedOn(),'dd MMMM yyyy')}"></span>
+        <br/>
+        <div th:if="${param.fileTypeError}" class="col-12">
+          <div class="alert alert-danger" style="margin-left: 30px">
+            <span>Wrong file type.You need to use .png, .jpg or .jpeg types.</span>
+          </div>
+        </div>
+      <button type="submit" class="btn btn-sm btn-outline-dark" id="submitForAvatar">Submit</button>
+      </form>
+    </div>
+</div>
+
+  <div class="row " id="bottomRow">
+    <div class="col-5">
+      <h2 id="personalData">Personal data: </h2>
+      <div class="table-responsive">
+        <table class="table table-light table-borderless mt-1 " id="tableProfile">
+          <tbody>
+          <tr class="bg-light">
+            <td class="inf">Username:</td>
+            <td class="descriptionProfile" th:text="${#authentication.name}">name</td>
+          </tr>
+          <tr class="bg-light">
+            <td class="inf">FirstName:</td>
+            <td class="descriptionProfile"
+                th:text="${#authentication.getPrincipal().getUser().getFirstName()}">name
+            </td>
+          </tr>
+          <tr class="bg-light">
+            <td class="inf">LastName:</td>
+            <td class="descriptionProfile"
+                th:text="${#authentication.getPrincipal().getUser().getLastName()}">name
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-2" style="margin-top: 30px">
+    <button type="button" class="btn btn-success " data-bs-toggle="modal"
+            data-bs-target="#editProfile" data-bs-whatever="@mdo" style="margin-top:30% ">Edit profile
+    </button>
+    <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+          </div>
+          <form th:method="PUT" th:action="@{/profile/{id}/editUser(id=${user.id})}"
+                th:object="${user}">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="userName" class="form-label">UserName: </label>
+                <input name="name" type="text" class="form-control" id="userName"
+                       aria-describedby="emailHelp" placeholder="userName" th:field="*{userName}">
+                <span style="color: darkred" th:errors="*{userName}"></span>
+              </div>
+              <div class="mb-3">
+                <label for="firstName" class="form-label">FirstName: </label>
+                <input name="firstName" type="text" class="form-control" id="firstName"
+                       placeholder="FirstName" th:field="*{firstName}">
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">LastName: </label>
+                <input name="lastName" type="text" class="form-control" id="lastName"
+                       placeholder="LastName" th:field="*{lastName}">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Update</button>
+              </div>
+        </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer th:insert="fragments/footer :: footer"></footer>
+
+
+
+
+</div>
+</body>
+</html>
