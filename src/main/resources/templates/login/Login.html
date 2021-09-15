@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row justify-content-center align-self-center" style="margin-top:150px;">
+            <div class="col-lg-4">
+                <div class="login-text"/>
+                    <div class="title" style="font-size: 200%;" >Sign in to your personal account </div>
+                    <div style="padding-top:30px;" class="panel-body">
+                    </div>
+                <form th:action="@{/doLogin}" method="post">
+                <div class="form-group">
+                    <label for="login" >Login</label>
+                    <input type="text" class="form-control" id="login" name="mylogin" placeholder="Enter login">
+                </div>
+                    <style>
+                        body {
+                            background: #b2c79b; /* Цвет фона и путь к файлу */
+                            color: #fff; /* Цвет текста */
+                        }
+                    </style>
+
+                <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter Password">
+                </div>
+                    <div class="input-group">
+                        <div class="check">
+                            <label>
+                                <input id="remember my login and password" type="checkbox" name="remember-me" value="1"> Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px" class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                        <div class="form-group">
+                            <div class="col-lg-16">
+                                <div style="border-top: 1px solid#b6b6b6; padding-left: 110px; padding-top:10px; font-size:85%; margin-top:90px">
+                                    Don't have an account?
+                                    <a href="../registration">Sign Up Here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cinema</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/static/css/registration.css}"/>
+</head>
+
+<body>
+<div class="container-fluid" style="margin-top:150px; margin-left: 350px">
+    <form th:method="POST" th:action="@{/registration}" th:object="${newUser}" class="form-horizontal" role="form">
+        <h2 style="margin-left: 240px">Registration </h2>
+        <div class="form-group">
+            <div class="col-sm-6">
+                <input type="text" id="userName" placeholder="Enter User Name" class="form-control" autofocus
+                       th:field="*{userName}">
+                <span style="color: darkred" th:errors="*{userName}"></span>
+            </div>
+        </div>
+        <div>
+            <style>
+                body {
+                    background: #b2c79b;
+                    color: #fff;
+                }
+            </style>
+        </div>
+        <div th:if="${param.usernameExists}" style="margin-top: 10px">
+            <div class="col-sm-4" >
+            <div class="alert alert-danger">
+                <span>User with this username has already exists.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-6">
+                <input type="password" id="password" placeholder="Enter Password" class="form-control"
+                       th:field="*{password}">
+
+                <span style="color: darkred" th:errors="*{password}"></span>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top: 10px">
+            <div class="col-sm-6">
+                <input type="email" id="email" placeholder="Enter Email" class="form-control" name="email"
+                       th:field="*{email}">
+                <span style="color: darkred" th:errors="*{email}"></span>
+            </div>
+        </div>
+        <div th:if="${param.emailExists}" style="margin-top: 10px">
+            <div class="col-sm-4" >
+            <div class="alert alert-danger">
+                <span>This email has already register.</span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 10px; margin-left: 280px">
+            Register</button>
+    </form>
+</div>
+</div>
+
+<script type="text/javascript" th:src="@{../static/js/jquery/jquery-3.6.0.min.js}"></script>
+<script th:href="@{../js/registration.js}"></script>
+</body>
+</html>
