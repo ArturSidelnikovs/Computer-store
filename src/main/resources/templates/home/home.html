@@ -1,95 +1,97 @@
 <html xmlns:th="http://www.thymeleaf.org/" lang="en">
-
 <head>
-  <meta charset="UTF-8"/>
-  <title>Films</title>
-  <link rel="stylesheet" th:href="@{/css/home/home.css}"/>
+    <meta charset="UTF-8"/>
+    <title>MobileShop</title>
+    <link rel="stylesheet" th:href="@{/css/home/home.css}"/>
 </head>
-
 <body>
 <header th:insert="fragments/header :: navigationBar"></header>
 <div class="container">
-  <section>
-    <div class="container-xxl">
-      <div class="row align-items-center">
-        <div class="col-7">
-          <h1>Nice to meet you </h1>
-        </div>
-        <div class="col-5">
-          <img class="w-100"
-               src="https://cdn1.expertreviews.co.uk/sites/expertreviews/files/2020/03/the-best-films-on-now-tv-sky-cinema.jpg"
-               alt="Films">
-        </div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="container-xxl">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row justify-content-between">
-              <th:block th:each="film:${itemActive}">
-                <div class="col">
-                  <div class="card w-100">
-                    <a th:href="@{/film/{id}(id=${film.getId()})}">
-                      <img th:src="@{${film.getImageUrls()}}"
-                           class="card-img-top" alt="carouselItem">
-                    </a>
-                    <div class="card-body">
-                      <a th:href="@{/film/{id}(id=${film.getId()})}" class="titleCard"
-                         th:text="${film.getName()}">name</a>
-                      <br/>
-                      <span class="card-text"
-                            th:text="${film.getGenre()}"></span>
-                      <br/>
-                      <span class="card-text"
-                            th:text="${film.getFilmDirector()}"></span>
-                    </div>
-                  </div>
+    <section>
+        <div class="container-xxl">
+            <div class="row align-items-center">
+                <div class="col-7" style="size: 100px">
+                    <h1>Welcome to Computer store</h1>
                 </div>
-              </th:block>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row justify-content-between">
-              <th:block th:each="film:${item}">
-                <div class="col">
-                  <div class="card w-100 ">
-                    <a th:href="@{/films/{id}(id=${film.getId()})}">
-                      <img th:src="@{${film.getImageUrls()}}"
-                           class="card-img-top" alt="carouselItem">
-                    </a>
-                    <div class="card-body">
-                      <a th:href="@{/films/{id}(id=${film.getId()})}"
-                         class="titleCard" th:text="${film.getName()}">name</a>
-                      <br/>
-                      <span class="card-text"
-                            th:text="${film.getGenre()}"></span>
-                      <br/>
-                      <span class="card-text"
-                            th:text="${film.getFilmDirector()}"></span>
-                    </div>
-                  </div>
+                <div class="col-5">
+                    <img class="w-100"
+                         src="https://imarket.by/upload/simpleimage_cache/7146588445dffcd0dfa20732fc2c48d3_2000x1180_w0_100.jpg"
+                         alt="Phones">
                 </div>
-              </th:block>
             </div>
-          </div>
+        </div>
+    </section>
+    <section>
+        <div class="container-xxl">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row justify-content-between">
+                            <th:block th:each="computer:${itemActive}">
+                                <div class="col">
+                                    <div class="card w-100">
+                                        <a th:href="@{/computers/{id}(id=${computer.getId()})}">
+                                            <img th:src="@{${computer.getImg()}}"
+                                                 class="card-img-top" alt="carouselItem">
+                                        </a>
+                                        <div class="card-body">
+                                            <a th:href="@{/computers/{id}(id=${computer.getId()})}" class="titleCard"
+                                               th:text="${computer.getName()}">name</a>
+                                            <br/>
+                                            <span class="card-text"
+                                                  th:text="${computer.getOs()}"></span>
+                                            <br/>
+                                            <span class="card-text"
+                                                  th:text="${computer.getProcessor()}"></span>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row justify-content-between">
+                            <th:block th:each="computer:${item}">
+                                <div class="col">
+
+                                    <div class="card w-100 ">
+                                        <a th:href="@{/computers/{id}(id=${computer.getId()})}">
+                                            <img th:src="@{${computer.getImg()}}"
+                                                 class="card-img-top" alt="carouselItem">
+                                        </a>
+                                        <div class="card-body">
+                                            <a th:href="@{/computers/{id}(id=${computer.getId()})}"
+                                               class="titleCard" th:text="${computer.getName()}">name</a>
+                                            <br/>
+                                            <span class="card-text"
+                                                  th:text="${computer.getOs()}"></span>
+                                            <br/>
+                                            <span class="card-text"
+                                                  th:text="${computer.getProcessor()}"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev" id="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next" id="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+            </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev" id="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next" id="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>
 <footer id="footer" th:insert="fragments/footer :: footer"></footer>
 </body>

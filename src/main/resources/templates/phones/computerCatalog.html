@@ -1,0 +1,137 @@
+<html xmlns:th="http://www.thymeleaf.org/" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8"/>
+  <title>PhoneCatalog</title>
+  <link rel="stylesheet" th:href="@{/css/computers/phoneCatalog.css}">
+
+
+</head>
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <input type="text" id="myInput" onkeyup="phoneFilter()" placeholder="Search for computer names..">
+          <span class="infoRawInPhoneCatalog" sec:authorize="isAnonymous()">If you want to buy computers in our store,please <a
+                  class="infoLinkInCat" th:href="@{/login}">login</a>,or
+                        make a <a class="infoLinkInCat" th:href="@{/registration}">registration</a> in out store.
+                    </span>
+        </div>
+      </div>
+
+
+      <table class="table table-striped table-borderless" id="sortTable">
+        <thead class="table-dark">
+        <tr>
+          <th></th>
+          <th onclick="sortTableRow(1,'sortTable')" id="nameHeader">Name</th>
+          <th onclick="sortTableNumber(2,'sortTable')" id="priceHeader">Price</th>
+          <th sec:authorize="hasAuthority('developers:write')"></th>
+          <th sec:authorize="isAuthenticated() and !hasRole('ROLE_ADMIN')"></th>
+          <th sec:authorize="hasAuthority('developers:write')"></th>
+        </tr>
+        </thead>
+        <tbody id="bd">
+        <tr id="elementTable" th:each="computer : ${computers}">
+          <td>
+            <a th:href="@{/computers/{id}(id=${computer.getId()})}">
+              <img class="image" th:src="@{${computer.getImg()}}" width="90"
+                   height="90" th:alt="Image"/>
+            </a></td>
+          <td>
+            <a class="name_column" th:href="@{/computers/{id}(id=${computer.getId()})}"
+               th:text="${computer.getName()}">
+            </a>
+
+          </td>
+          <td class="price_column" th:text="${computer.getPrice}+'$'">price</td>
+
+          <td sec:authorize="isAuthenticated() and !hasRole('ROLE_ADMIN')">
+            <form th:action="@{/profile/{id}(id=${computer.getId()},requestFrom='catalog')}" th:method="POST"
+                  th:name="addPurchaseInPhoneCatalog">
+
+              <input th:unless="${userUtils.containsPhoneInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+                     class="btn btn-danger" type="submit" name="addToList" value="Add to List"/>
+              <input th:if="${userUtils.containsPhoneInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+                     class="btn btn-success disabled" type="submit" name="addToList" value="Added"/>
+            </form>
+          </td>
+
+          <td sec:authorize="hasAuthority('developers:write')">
+            <form th:action="@{/computers/{id}/updatePhone(id=${computer.getId()})}" th:method="GET"
+                  th:name="update">
+              <input class="btn btn-dark" type="submit" name="info" value="Update"/>
+            </form>
+          </td>
+          <td sec:authorize="hasAuthority('developers:write')">
+            <input type="hidden" th:value="${computer.id}">
+            <a id="deleteA">
+              <span class="btn btn-dark" style="margin-bottom: 16px">Delete</span>
+            </a>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-4">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Pages</a>
+        </li>
+        <th:block th:each="i :${body}">
+          <li class="page-item active" th:if="${((i)-1)==computers.getNumber()}">
+            <a class="page-link" href="#" tabindex="-1">[[${i}]]</a>
+          </li>
+          <li class="page-item disabled" th:if="${(i)==-1}">
+            <a class="page-link" href="#" tabindex="-1">...</a>
+          </li>
+          <li class="page-item " th:if="${((i)-1)!=computers.getNumber()&&(i)!=-1}">
+            <a class="page-link" th:href="@{/computers(page=${(i)-1},size=${computers.getSize()})}"
+               tabindex="-1">[[${i}]]</a>
+          </li>
+        </th:block>
+      </ul>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+              aria-expanded="false" aria-controls="collapseExample">
+        Elements per page:
+        <span th:text="${computers.getSize()}"></span>
+      </button>
+
+      <div class="collapse col mt-3" id="collapseExample">
+        <div class="card card-body">
+          <ul class="pagination">
+            <th:block th:each="c :${amountOfElements}">
+              <li class="page-item active" th:if="${computers.getSize()==c}">
+                <a class="page-link" href="#" tabindex="-1">[[${c}]]</a>
+              </li>
+              <li class="page-item " th:unless="${computers.getSize()==c}">
+                <a class="page-link" th:href="@{/computers(page=${computers.getNumber()},size=${c})}"
+                   tabindex="-1">[[${c}]]</a>
+              </li>
+            </th:block>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+<footer th:insert="fragments/footer :: footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script th:src="@{/js/computersCatalog.js}"></script>
+</body>
+</html>

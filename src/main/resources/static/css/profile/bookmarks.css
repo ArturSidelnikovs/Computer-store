@@ -1,0 +1,30 @@
+body:not(.container) {
+    background-color: #e3e3e3;
+}
+
+.container {
+    background-color: white;
+}
+
+.titleBookmark {
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black
+}
+
+.titleBookmark:hover {
+    color: #888888;
+}
+
+.addInBookmarks {
+    margin-right: 2%;
+    margin-bottom: 2%
+}
+
+.getPriceInBookmark {
+    font-size: 30px;
+    opacity: 0.5;
+    margin-right: 11%;
+    margin-bottom: 2%
+}

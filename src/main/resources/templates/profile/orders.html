@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/profile/orders.css}">
+</head>
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <div th:class="h1">Your orders</div>
+      <span id="pageWithoutOrders" th:if="${orders.isEmpty()}">
+            You don't have any orders yet.Go to our <a th:href="@{/computers}">catalog</a> to find a computer for you</span>
+
+      <table class="table mt-3 table-borderless" id="purchaseTable">
+        <tbody>
+        <tr th:each="order : ${orders}">
+          <td>
+            <div class="card">
+              <div class=" card-body">
+                <div class="row">
+                  <div class="col-4">
+                                        <span th:text="'Order №'+${orders.indexOf(order)+1}"
+                                              id="orderNumber"></span>
+                    <br/>
+                    <span class="card-title"
+                          th:text="'Date of creation: '+${order.getCreationDate()}"
+                          id="dateOfCreation"></span>
+                    <br/><br/>
+                    <span th:text="${' Elements: '}" id="orderElements"></span>
+
+                    <th:block th:each="value : ${orderUtils.orderInformation(order.getComputers())}">
+                      <br/>
+                      <span th:text="'Phone name: '+${value.getKey()} +'. Amount:  '+${value.getValue()} "
+                            id="orderElement"></span>
+                    </th:block>
+                    <br/>
+                    <form th:action="@{/profile/{id}/orders(id=${order.getId()})}" th:method="PUT"
+                          style="display: inline">
+                      <button type="submit" class="orderButtons btn btn-danger"
+                              th:if="${order.getState().name()!='CANCELED'&& order.getState().name()!='DELIVERED'}">
+                        Cancel this order
+                      </button>
+                      <button type="submit" class="orderButtons btn btn-primary"
+                              th:if="${order.getState().name()=='CANCELED'}">
+                        Restore the order
+                      </button>
+                    </form>
+                  </div>
+                  <div class="col-2">
+                    <img th:if="${order.getState().name().equals('DELIVERED')}"
+                         th:src="@{/img/profile/delivered.jpg}"
+                         class="rounded mx-auto d-block" alt="deliveredImg" width="150px"
+                         height="150px">
+                  </div>
+                  <div class="col-6">
+                    <form th:action="@{/profile/{id}/order(id=${order.getId()})}"
+                          th:method="DELETE">
+                      <input class="card-title"
+                             th:if="${order.getState().name()=='CANCELED'}or ${order.getState().name()=='DELIVERED'}"
+                             type="image" th:src="@{/img/profile/garbageIcon.png}" alt="garbageIcon"
+                             width="20" height="20" id="garbageOrder"/>
+                    </form>
+                    <span th:text="'Status of order: '+${order.getState()}"
+                          id="orderStatus">Status</span>
+                    <span th:text="'Sum of purchases: '+${orderUtils.orderSum(order.getComputers())} + '$'"
+                          id="sumInOrder"></span>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

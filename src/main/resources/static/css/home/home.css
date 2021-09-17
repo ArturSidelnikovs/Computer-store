@@ -11,11 +11,11 @@ section {
 }
 
 .carousel-control-prev .carousel-control-prev-icon {
-    background-image: url("");
+    background-image: url("../../img/home/left-arrow.svg");
 }
 
 .carousel-control-next .carousel-control-next-icon {
-    background-image: url("");
+    background-image: url("../../img/home/right-arrow-angle.svg");
 }
 
 .carousel-control-next, .carousel-control-prev {

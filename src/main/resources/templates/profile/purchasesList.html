@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" th:href="@{/css/profile/purchasesList.css}">
+</head>
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <div th:class="h1">Purchase list</div>
+
+      <span id="phoneSum" th:unless="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
+           userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders()).getComputers().isEmpty()}"></span>
+      <img class="rounded mx-auto d-block"
+           th:if="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
+           userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders()).getComputers().isEmpty()}"
+           th:src="@{/img/profile/emptyList.png}" alt="EmptyList"/>
+
+      <table class="table mt-5" id="purchaseTable"
+             th:unless="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
+           userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders()).getComputers().isEmpty()}">
+        <tbody>
+        <th:block th:each="computer : ${purchaseList}" id="purchaseDiv">
+          <th:block th:each="computer2 : ${computer.getValue()}">
+            <tr>
+              <td th:class="name_column" th:text="${computer.getKey()}"
+                  id="nameColumn">name
+              </td>
+
+              <td th:class="image">
+                <a th:href="@{/computers/{id}(id=${computer2.getKey().getId()})}">
+                  <img th:src="@{${computer2.getKey().getImg()}}" th:width="90"
+                       th:height="90" th:alt="Image"/>
+                </a>
+              </td>
+              <td id="actionWithPurchases">
+                <form th:action="@{/profile/{id}/minusOperator(id=${computer2.getKey().getId()})}"
+                      th:name="minusOperationInPurchaseList" id="minusFormButton" th:method="DELETE">
+                  <button th:if="${computer2.getValue()==1}"
+                          type="button" class="btn btn-secondary btn-sm disabled"
+                          id="minusButtonDisabled">-
+                  </button>
+                  <button th:unless="${computer2.getValue()==1}"
+                          type="submit" class="btn btn-secondary btn-sm " id="minusButton">-
+                  </button>
+                </form>
+                <span id="amountOfPurchases" th:text="${computer2.getValue()}"></span>
+
+                <form th:action="@{/profile/{id}/plusOp(id=${computer2.getKey().getId()})}"
+                      th:name="addPurchaseInPlusOperation" id="plusFormButton" th:method="POST">
+                  <button type="submit" class="btn btn-secondary btn-sm" id="plusButton">+</button>
+                </form>
+              </td>
+
+              <td style="width: 200px">
+                <p th:class="price_column"
+                   th:text="${(computer2.getKey().getPrice()*computer2.getValue())+'$'}" id="priceColumn"></p>
+
+              </td>
+              <td>
+                <form th:action="@{/profile/{id}/allPhones(id=${computer2.getKey().getId()})}"
+                      th:method="DELETE"
+                      th:name="garbageIconInPurchaseList">
+
+
+                  <input type="image" th:src="@{/img/profile/garbageIcon.png}" alt="garbageIcon"
+                         width="30" height="30" id="deleteFromPurchaseListAllCurrentPhones"/>
+                </form>
+              </td>
+            </tr>
+          </th:block>
+        </th:block>
+        </tbody>
+      </table>
+      <span id="amountOfPurchasesAndSum" th:unless="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
+           userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders()).getComputers().isEmpty()}"></span>
+
+    </div>
+    <form th:method="POST"
+          th:action="@{/profile/{id}/order(id=(${#authentication.getPrincipal().getUser().getId()}))}"
+          th:name="makeAnOrder">
+      <button type="submit" class="btn btn-success"
+              th:unless="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
+           userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders()).getComputers().isEmpty()}"
+              id="makeAnOrderButton">Make an order
+      </button>
+    </form>
+  </div>
+  <footer th:insert="fragments/footer :: footer"></footer>
+</div>
+<script th:src="@{/js/purchaseSum.js}"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+.addButtonInShowPhone {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+body:not(.container) {
+    background-color: #e3e3e3;
+}
+
+.container {
+    background-color: white;
+    margin-bottom: 56px;
+    padding-bottom: 30px;
+}
+
+.ImagesShow img {
+    border: none;
+}
+
+.infoRawInShowPhone {
+    margin-top: 8px;
+    margin-left: 100px;
+    opacity: .6;
+}
+
+.infoLinkInShow {
+    font-weight: bold;
+    text-decoration: none;
+    color: gray;
+    font-size: 18px;
+}
+
+#bookmarkStarGray {
+    opacity: 0.1;
+    font-size: 30px;
+}
+
+#bookmarkStarGray:hover {
+    opacity: 1;
+}
+
+#bookmarkStarBright {
+    opacity: 1;
+    font-size: 30px
+}
+
+#bookmarkStarBright:hover {
+    opacity: 0.1;
+}

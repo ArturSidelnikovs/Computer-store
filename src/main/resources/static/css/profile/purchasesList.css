@@ -1,0 +1,45 @@
+.container {
+    margin-top: 62px;
+
+}
+
+#purchaseTable {
+    vertical-align: middle;
+    text-align: center;
+
+}
+
+#nameColumn, #priceColumn {
+    font-size: 25px
+}
+
+#minusFormButton, #plusFormButton {
+    display: inline;
+
+}
+
+#plusButton, #minusButton, #minusButtonDisabled {
+    width: 28px;
+}
+
+#amountOfPurchases {
+    display: inline;
+    margin-right: 5px;
+    margin-left: 5px
+}
+
+#amountOfPurchasesAndSum {
+    font-weight: bold;
+    float: right;
+    padding-right: 150px;
+}
+
+#makeAnOrderButton {
+    float: right;
+    margin-top: 80px;
+    margin-right: 110px
+}
+
+#phoneSum {
+    opacity: .8
+}

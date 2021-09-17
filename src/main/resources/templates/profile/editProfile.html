@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>EditProfile</title>
+  <style>
+    body:not(.container) {
+      background-color: #e3e3e3;
+    }
+  </style>
+</head>
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5 " style="margin-top: 150px">
+      <div class="card">
+        <div class="card-body" >
+          <form th:method="PUT" th:action="@{/profile/{id}/editUser(id=${user.id})}" th:object="${user}">
+            <div class="mb-3">
+              <label for="userName" class="form-label">UserName: </label>
+              <input name="name" type="text" class="form-control" id="userName"
+                     aria-describedby="emailHelp" placeholder="userName" th:field="*{userName}">
+              <span style="color: darkred" th:errors="*{userName}"></span>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email: </label>
+              <input name="email" type="text" class="form-control" id="email"
+                     placeholder="email" th:field="*{email}">
+              <span style="color: darkred" th:errors="*{email}"></span>
+            </div>
+            <div class="mb-3">
+              <label for="firstName" class="form-label">FirstName: </label>
+              <input name="firstName" type="text" class="form-control" id="firstName"
+                     placeholder="FirstName" th:field="*{firstName}">
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">LastName: </label>
+              <input name="lastName" type="text" class="form-control" id="lastName"
+                     placeholder="LastName" th:field="*{lastName}">
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address: </label>
+              <input name="address" type="text" class="form-control" id="address"
+                     placeholder="address" th:field="*{address}">
+            </div>
+            <button type="submit" class="btn btn-success">Update</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

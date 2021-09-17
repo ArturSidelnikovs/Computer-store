@@ -1,0 +1,38 @@
+
+body:not(.container) {
+    background-color: #e3e3e3;
+}
+
+.container {
+    margin-top: 62px;
+    background-color: white;
+}
+.orderButtons{
+    margin-top: 10px;
+}
+#sumInOrder {
+    float: right;
+    opacity: .8;
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+}
+
+#orderStatus {
+    font-weight: bold ;
+    position: absolute;
+    bottom: 10px;
+}
+
+#garbageOrder {
+    float: right;
+}
+
+#orderNumber {
+    font-weight: bold;
+    font-size: 25px;
+}
+#dateOfCreation{
+    font-weight: bold;
+    margin-top: 10px;
+}

@@ -1,0 +1,222 @@
+<html xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>NewPhone</title>
+  <style>
+    body:not(.container) {
+      background-color: #e3e3e3;
+    }
+  </style>
+</head>
+
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5 " style="margin-top: 56px">
+      <div class="card">
+        <div class="card-body">
+          <form th:method="POST" th:action="@{/computers}" th:object="${newComputer}">
+            <div class="mb-3">
+              <label for="ComputerName" class="form-label" style="font-weight: bold">Phone name: </label>
+              <input name="name" type="text" class="form-control" id="ComputerName"
+                     aria-describedby="emailHelp" placeholder="Name" th:field="*{name}">
+              <span style="color: darkred" th:errors="*{name}"></span>
+            </div>
+            <div class="mb-3">
+              <label for="PhonePrice" class="form-label" style="font-weight: bold">Price of the computer:
+                <span style="font-weight: normal"> (You have to use Double.Example: 780 or 567.2)</span>
+              </label>
+              <input name="phonePrice: " type="text" class="form-control" id="PhonePrice"
+                     placeholder="Price"
+                     th:field="*{price}">
+              <span style="color: darkred" th:errors="*{price}"></span>
+            </div>
+            <div class="mb-3">
+              <label for="PhoneProcessor" class="form-label" style="font-weight: bold">Processor
+                <span style="font-weight: normal">(You have to use String.Example:" Snapdragon 888")</span></label>
+              <input name="processor" type="text" class="form-control" id="PhoneProcessor"
+                     placeholder="Processor" th:field="*{processor}">
+              <span style="color: darkred" th:errors="*{processor}"></span>
+            </div>
+            <div class="mb-3">
+              <label for="PhoneImg" class="form-label" style="font-weight: bold">Image
+                <span style="font-weight: normal">(You have to add link to image)</span></label>
+              <input name="image" type="text" class="form-control" id="PhoneImg" placeholder="ImageLink"
+                     th:field="*{img}">
+              <span style="color: darkred" th:errors="*{img}"></span>
+            </div>
+            <div class="mb-3">
+              <label th:for="os">
+                <span style="font-weight: bold">Operating system: </span>
+                <select class="form-select form-select-sm" aria-label="Default select example"
+                        name="os">
+                  <option th:each="os : ${os}"
+                          th:value="${{os}}"
+                          th:text="${os}"
+                  ></option>
+                </select>
+              </label>
+            </div>
+            <div class="mb-3">
+              <label for="screenSize" class="form-label" style="font-weight: bold">ScreenSize
+                <span style="font-weight: normal"> (You have to use Double.Example: 5.6)</span></label>
+              <input name="ram" type="text" class="form-control" id="screenSize" placeholder="screenSize"
+                     th:field="*{screenSize}">
+            </div>
+            <div class="mb-3">
+              <label for="ram" class="form-label" style="font-weight: bold">RAM
+                <span style="font-weight: normal"> (You have to use Integer.Example: 8)</span></label>
+              <input name="ram" type="text" class="form-control" id="ram" placeholder="ram"
+                     th:field="*{randomAccessMemory}">
+            </div>
+            <div class="mb-3">
+              <label for="numberOfCameras" class="form-label" style="font-weight: bold">Number of cameras
+                <span style="font-weight: normal"> (You have to use Integer.Example: 3)</span></label>
+              <input name="numberOfCameras" type="text" class="form-control" id="numberOfCameras"
+                     placeholder="numberOfCameras"
+                     th:field="*{numberOfMainCameras}">
+            </div>
+            <div class="mb-3">
+              <label for="numberOfMatrixPoints" class="form-label" style="font-weight: bold">Number of
+                matrix points
+                <span style="font-weight: normal"> (You have to use Integer.Example: 64)</span></label>
+              <input name="numberOfMatrixPoints" type="text" class="form-control"
+                     id="numberOfMatrixPoints" placeholder="numberOfMatrixPoints"
+                     th:field="*{numberOfMatrixPoints}">
+            </div>
+            <div class="mb-3">
+              <label for="numberOfSimCards" class="form-label" style="font-weight: bold">Number of sim
+                cards
+                <span style="font-weight: normal"> (You have to use Integer.Example: 2)</span></label>
+              <input name="numberOfSimCards" type="text" class="form-control" id="numberOfSimCards"
+                     placeholder="numberOfSimCards"
+                     th:field="*{getSsdCapacity}">
+            </div>
+            <div class="mb-3">
+              <label for="cpuClockSpeed" class="form-label" style="font-weight: bold">Cpu clock speed
+                <span style="font-weight: normal"> (You have to use Integer.Example: 2400)</span></label>
+              <input name="cpuClockSpeed" type="text" class="form-control" id="cpuClockSpeed"
+                     placeholder="cpuClockSpeed"
+                     th:field="*{cpuClockSpeed}">
+            </div>
+            <div class="mb-3">
+              <label for="graphicsAccelerator" class="form-label" style="font-weight: bold">Graphics
+                accelerator
+                <span style="font-weight: normal"> (You have to use String.Example:"Adreno 660")</span></label>
+              <input name="graphicsAccelerator" type="text" class="form-control" id="graphicsAccelerator"
+                     placeholder="graphicsAccelerator"
+                     th:field="*{graphicsAccelerator}">
+            </div>
+            <div class="mb-3">
+              <label for="bodyMaterial" class="form-label" style="font-weight: bold">BodyMaterial
+                <span style="font-weight: normal"> (You have to use String.Example:"metal")</span></label>
+              <input name="bodyMaterial" type="text" class="form-control" id="bodyMaterial"
+                     placeholder="bodyMaterial"
+                     th:field="*{bodyMaterial}">
+            </div>
+            <div class="mb-3">
+              <label for="backCoverMaterial" class="form-label" style="font-weight: bold">Back cover
+                material
+                <span style="font-weight: normal"> (You have to use String.Example:"metal")</span></label>
+              <input name="backCoverMaterial" type="text" class="form-control" id="backCoverMaterial"
+                     placeholder="backCoverMaterial"
+                     th:field="*{backCoverMaterial}">
+            </div>
+            <div class="mb-3">
+              <label for="bodyColor" class="form-label" style="font-weight: bold">Body color
+                <span style="font-weight: normal"> (You have to use String.Example:"black")</span></label>
+              <input name="bodyColor" type="text" class="form-control" id="bodyColor"
+                     placeholder="bodyColor"
+                     th:field="*{bodyColor}">
+            </div>
+            <div class="mb-3">
+              <label for="length" class="form-label" style="font-weight: bold">Length
+                <span style="font-weight: normal"> (You have to use Double.Example:"151.4")</span></label>
+              <input name="length" type="text" class="form-control" id="length"
+                     placeholder="length"
+                     th:field="*{length}">
+            </div>
+            <div class="mb-3">
+              <label for="width" class="form-label" style="font-weight: bold">Width
+                <span style="font-weight: normal"> (You have to use Double.Example:"71.2")</span></label>
+              <input name="width" type="text" class="form-control" id="width"
+                     placeholder="width"
+                     th:field="*{width}">
+            </div>
+            <div class="mb-3">
+              <label for="thickness" class="form-label" style="font-weight: bold">Thickness
+                <span style="font-weight: normal"> (You have to use Double.Example:"6.5")</span></label>
+              <input name="thickness" type="text" class="form-control" id="thickness"
+                     placeholder="thickness"
+                     th:field="*{thickness}">
+            </div>
+            <div class="mb-3">
+              <label for="weight" class="form-label" style="font-weight: bold">Weight
+                <span style="font-weight: normal"> (You have to use Integer.Example:"160")</span></label>
+              <input name="weight" type="text" class="form-control" id="weight"
+                     placeholder="weight"
+                     th:field="*{weight}">
+            </div>
+            <div class="mb-3">
+              <label th:for="screenTechnology">
+                <span style="font-weight: bold">Screen technology: </span>
+                <select class="form-select form-select-sm" aria-label="Default select example"
+                        name="screenTechnology">
+                  <option th:each="screenTech : ${screenTech}"
+                          th:value="${{screenTech}}"
+                          th:text="${screenTech}"></option>
+                </select>
+              </label>
+            </div>
+            <div class="mb-3">
+              <label for="screenRefreshRate" class="form-label" style="font-weight: bold">Screen refresh
+                rate
+                <span style="font-weight: normal"> (You have to use Integer.Example:"120")</span></label>
+              <input name="screenRefreshRate" type="text" class="form-control" id="screenRefreshRate"
+                     placeholder="screenRefreshRate"
+                     th:field="*{screenRefreshRate}">
+            </div>
+            <div class="mb-3">
+              <label for="accumulatorCapacity" class="form-label" style="font-weight: bold">Accumulator
+                capacity
+                <span style="font-weight: normal"> (You have to use Integer.Example:"4500")</span></label>
+              <input name="accumulatorCapacity" type="text" class="form-control" id="accumulatorCapacity"
+                     placeholder="accumulatorCapacity"
+                     th:field="*{accumulatorCapacity}">
+            </div>
+            <div class="mb-3">
+              <label for="accumulatorType" class="form-label" style="font-weight: bold">Accumulator type
+                <span style="font-weight: normal"> (You have to use String.Example:"Li-ion")</span></label></label>
+              <input name="accumulatorType" type="text" class="form-control" id="accumulatorType"
+                     placeholder="accumulatorType"
+                     th:field="*{accumulatorType}">
+            </div>
+            <div class="mb-3">
+              <label for="wifi" class="form-label" style="font-weight: bold">Wi-fi
+                <span style="font-weight: normal"> (You have to use Double.Example:"5.0")</span></label>
+              <input name="wifi" type="text" class="form-control" id="wifi"
+                     placeholder="wifi"
+                     th:field="*{wifi}">
+            </div>
+            <div class="mb-3">
+              <label for="connectionConnector" class="form-label" style="font-weight: bold">Connection
+                connector
+                <span style="font-weight: normal"> (You have to use String.Example:"lightning")</span></label>
+              <input name="connectionConnector" type="text" class="form-control" id="connectionConnector"
+                     placeholder="connectionConnector"
+                     th:field="*{connectionConnector}">
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

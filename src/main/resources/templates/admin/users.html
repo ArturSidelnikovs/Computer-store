@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Users</title>
+  <style>
+    body:not(.container) {
+      background-color: #e3e3e3;
+    }
+
+    .container {
+      background-color: white;
+    }
+
+  </style>
+</head>
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <table class="table table-striped" style="margin-top: 80px" id="userTable">
+        <thead>
+        <tr>
+          <th onclick="sortTableRow(0,'userTable')" style="cursor: pointer">Username</th>
+          <th onclick="sortTableRow(1,'userTable')" style="cursor: pointer">Email</th>
+          <th onclick="sortTableRow(2,'userTable')" style="cursor: pointer">Status</th>
+          <th onclick="sortTableRow(3,'userTable')" style="cursor: pointer">Role</th>
+          <th onclick="sortTableRow(4,'userTable')" style="cursor: pointer">FirstName</th>
+          <th onclick="sortTableRow(5,'userTable')" style="cursor: pointer">LastName</th>
+          <th onclick="sortTableRow(6,'userTable')" style="cursor: pointer">Address</th>
+          <th ></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="user : ${users}">
+          <form th:action="@{/admin/users/{id}(id=${user.getId()})}" th:method="PUT">
+            <tr>
+              <td th:class="name_column" th:text="${user.getUserName()}">Username</td>
+              <td th:class="name_column" th:text="${user.getEmail()}">email</td>
+              <td>
+                <label th:for="status">
+                  <select class="form-select form-select-sm" aria-label="Default select example"
+                          name="status">
+                    <option th:each="status : ${status}"
+                            th:value="${{status}}"
+                            th:text="${status}"
+                            th:selected="${status}==${user.getStatus()}"></option>
+                  </select>
+                </label>
+              </td>
+              <td>
+                <label th:for="role">
+                  <select class="form-select form-select-sm" aria-label="Default select example"
+                          name="role">
+                    <option th:each="role : ${roles}"
+                            th:value="${{role}}"
+                            th:text="${role}"
+                            th:selected="${role}==${user.getRole()}"></option>
+                  </select>
+                </label>
+              </td>
+              <td th:class="name_column" th:text="${user.getFirstName()}">FirstName</td>
+              <td th:class="name_column" th:text="${user.getLastName()}">LastName</td>
+              <td th:class="name_column" th:text="${user.getAddress()}">Address</td>
+              <td>
+                <button class="btn btn-sm btn-success" type="submit">Change</button>
+              </td>
+            </tr>
+          </form>
+        </th:block>
+        </tbody>
+      </table>
+
+      <div class="mt-3">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Pages</a>
+          </li>
+          <th:block th:each="i :${body}">
+            <li class="page-item active" th:if="${((i)-1)==users.getNumber()}">
+              <a class="page-link" href="#" tabindex="-1">[[${i}]]</a>
+            </li>
+            <li class="page-item disabled" th:if="${(i)==-1}">
+              <a class="page-link" href="#" tabindex="-1">...</a>
+            </li>
+            <li class="page-item " th:if="${((i)-1)!=users.getNumber()&&(i)!=-1}">
+              <a class="page-link" th:href="@{/admin/users(page=${(i)-1},size=${users.getSize()})}"
+                 tabindex="-1">[[${i}]]</a>
+            </li>
+          </th:block>
+        </ul>
+
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Elements per page</a>
+          </li>
+          <th:block th:each="c :${amountOfElements}">
+            <li class="page-item active" th:if="${users.getSize()==c}">
+              <a class="page-link" href="#" tabindex="-1">[[${c}]]</a>
+            </li>
+            <li class="page-item " th:unless="${users.getSize()==c}">
+              <a class="page-link" th:href="@{/admin/users(page=${users.getNumber()},size=${c})}"
+                 tabindex="-1">[[${c}]]</a>
+            </li>
+          </th:block>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<footer th:insert="fragments/footer :: footer"></footer>
+<script th:src="@{/js/computersCatalog.js}"></script>
+</body>
+</html>

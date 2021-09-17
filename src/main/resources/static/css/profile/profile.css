@@ -35,6 +35,10 @@ td {
     margin-left: 60px;
 }
 
+#personalData {
+    margin-top: 30px
+}
+
 .inf {
     font-size: 20px;
     opacity: .8;
