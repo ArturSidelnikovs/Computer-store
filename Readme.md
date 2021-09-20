@@ -1,6 +1,5 @@
+Online computer store. Developed on Spring boot 2.5.2 based on apache maven.
 
-Computer store application.Back end part was developed with such technologies like Java 8+,Spring Framework,Hibernate,MySQL DB,Lombok. REST technology was applied with AJAX technology.
+Tools used in the development of the project: Java 15, Spring Framework, Hibernate, MySQL, Lombok, JavaScript and jQuery
 
-Front end part was developed with HTML,CSS, using Thymeleaf java template engine. Using JavaScript and JQuery.Using bootstrap framework and sweetAlert library.
-
-The project builds by apache maven 
+The project uses HTML pages based on the Thymeleaf server engine. Additionally, CSS styles are enabled.
