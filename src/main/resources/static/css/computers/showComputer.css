@@ -1,4 +1,4 @@
-.addButtonInShowPhone {
+.addButtonInShowComputer {
     margin-top: 30px;
     margin-left: 30px;
 }
@@ -17,7 +17,7 @@ body:not(.container) {
     border: none;
 }
 
-.infoRawInShowPhone {
+.infoRawInShowComputer {
     margin-top: 8px;
     margin-left: 100px;
     opacity: .6;
@@ -30,20 +30,3 @@ body:not(.container) {
     font-size: 18px;
 }
 
-#bookmarkStarGray {
-    opacity: 0.1;
-    font-size: 30px;
-}
-
-#bookmarkStarGray:hover {
-    opacity: 1;
-}
-
-#bookmarkStarBright {
-    opacity: 1;
-    font-size: 30px
-}
-
-#bookmarkStarBright:hover {
-    opacity: 0.1;
-}

@@ -3,7 +3,7 @@ package edu.app.controller.profile;
 import edu.app.config.security.SecurityUser;
 import edu.app.model.Order.Order;
 import edu.app.model.Order.OrderState;
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import edu.app.model.user.User;
 import edu.app.service.IService;
 import edu.app.util.orderUtils.OrderUtils;
@@ -79,7 +79,7 @@ import java.util.Map;
             if (order != null) {
                 userComputers = order.getComputers();
             }
-            Map<String, Map<Computer, Integer>> phones = orderUtils.convertListOfPhonesIntoMap(userComputers);
+            Map<String, Map<Computer, Integer>> phones = orderUtils.convertListOfComputersIntoMap(userComputers);
             model.addAttribute("purchaseList", phones);
             model.addAttribute("userUtils", userUtils);
             return "profile/purchasesList";
@@ -104,8 +104,8 @@ import java.util.Map;
         }
 
         @PostMapping(value = "/{id}")
-        public String addPurchaseInPhoneCatalog(@PathVariable Long id, Authentication authentication,
-                                                @RequestParam(value = "requestFrom", required = false) String requestFromParam) {
+        public String addPurchaseInComputerCatalog(@PathVariable Long id, Authentication authentication,
+                                                   @RequestParam(value = "requestFrom", required = false) String requestFromParam) {
             SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
             User user = securityUser.getUser();
             Order order = userUtils.getPreparatoryOrder(user.getOrders());
@@ -116,7 +116,7 @@ import java.util.Map;
                 userUtils.addOrder(user.getOrders(), order);
             }
             Computer computerById = computerIService.findById(id);
-            orderUtils.addPhone(order.getComputers(), computerById);
+            orderUtils.addComputer(order.getComputers(), computerById);
 
 
             orderService.save(order);
@@ -129,12 +129,12 @@ import java.util.Map;
         }
 
         @PostMapping(value = "/{id}/plusOp")
-        public String addPhoneInPlusOperation(@PathVariable Long id, Authentication authentication) {
+        public String addComputersInPlusOperation(@PathVariable Long id, Authentication authentication) {
             SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
             User user = securityUser.getUser();
             Order order = userUtils.getPreparatoryOrder(user.getOrders());
             Computer computerById = computerIService.findById(id);
-            orderUtils.addPhone(order.getComputers(), computerById);
+            orderUtils.addComputer(order.getComputers(), computerById);
 
             orderService.save(order);
             return "redirect:/profile/" + user.getId() + "/purchasesList";
@@ -205,18 +205,18 @@ import java.util.Map;
             SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
             User user = securityUser.getUser();
             Order order = userUtils.getPreparatoryOrder(user.getOrders());
-            orderUtils.deletePhone(order.getComputers(), id);
+            orderUtils.deleteComputer(order.getComputers(), id);
 
             orderService.save(order);
             return "redirect:/profile/" + securityUser.getUser().getId() + "/purchasesList";
         }
 
-        @DeleteMapping(value = "/{id}/allPhones")
-        public String removeAllPhonesInOneOrderFromPurchase(@PathVariable Long id, Authentication authentication) {
+        @DeleteMapping(value = "/{id}/allComputers")
+        public String removeAllComputersInOneOrderFromPurchase(@PathVariable Long id, Authentication authentication) {
             SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
             User user = securityUser.getUser();
             Order order = userUtils.getPreparatoryOrder(user.getOrders());
-            orderUtils.deleteAllPhones(order.getComputers(), id);
+            orderUtils.deleteAllComputers(order.getComputers(), id);
             if (order.getComputers().isEmpty()) {
                 user.getOrders().remove(order);
                 orderService.deleteById(order.getId());

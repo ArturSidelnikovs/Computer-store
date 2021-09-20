@@ -34,8 +34,8 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String phoneList(Model model,
-                            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+    public String computerList(Model model,
+                               @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<User> users = userService.findAllWithPagination(pageable);
         int[] body = pagination(users);
         model.addAttribute("status", Status.values());

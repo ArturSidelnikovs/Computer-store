@@ -2,8 +2,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8"/>
-  <title>PhoneCatalog</title>
-  <link rel="stylesheet" th:href="@{/css/computers/phoneCatalog.css}">
+  <title>ComputerCatalog</title>
+  <link rel="stylesheet" th:href="@{/css/computers/computerCatalog.css}">
 
 
 </head>
@@ -14,8 +14,8 @@
     <div class="col">
       <div class="row">
         <div class="col">
-          <input type="text" id="myInput" onkeyup="phoneFilter()" placeholder="Search for computer names..">
-          <span class="infoRawInPhoneCatalog" sec:authorize="isAnonymous()">If you want to buy computers in our store,please <a
+          <input type="text" id="myInput" onkeyup="computerFilter()" placeholder="Search for computer names..">
+          <span class="infoRawInComputerCatalog" sec:authorize="isAnonymous()">If you want to buy computers in our store,please <a
                   class="infoLinkInCat" th:href="@{/login}">login</a>,or
                         make a <a class="infoLinkInCat" th:href="@{/registration}">registration</a> in out store.
                     </span>
@@ -35,7 +35,7 @@
         </tr>
         </thead>
         <tbody id="bd">
-        <tr id="elementTable" th:each="computer : ${computers}">
+        <tr id="elementTable" th:each="computer:${computers}">
           <td>
             <a th:href="@{/computers/{id}(id=${computer.getId()})}">
               <img class="image" th:src="@{${computer.getImg()}}" width="90"
@@ -51,17 +51,17 @@
 
           <td sec:authorize="isAuthenticated() and !hasRole('ROLE_ADMIN')">
             <form th:action="@{/profile/{id}(id=${computer.getId()},requestFrom='catalog')}" th:method="POST"
-                  th:name="addPurchaseInPhoneCatalog">
+                  th:name="addPurchaseInComputerCatalog">
 
-              <input th:unless="${userUtils.containsPhoneInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+              <input th:unless="${userUtils.containsComputerInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
                      class="btn btn-danger" type="submit" name="addToList" value="Add to List"/>
-              <input th:if="${userUtils.containsPhoneInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+              <input th:if="${userUtils.containsComputerInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
                      class="btn btn-success disabled" type="submit" name="addToList" value="Added"/>
             </form>
           </td>
 
           <td sec:authorize="hasAuthority('developers:write')">
-            <form th:action="@{/computers/{id}/updatePhone(id=${computer.getId()})}" th:method="GET"
+            <form th:action="@{/computers/{id}/updateComputer(id=${computer.getId()})}" th:method="GET"
                   th:name="update">
               <input class="btn btn-dark" type="submit" name="info" value="Update"/>
             </form>

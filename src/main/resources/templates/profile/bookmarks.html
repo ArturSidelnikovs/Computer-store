@@ -59,11 +59,11 @@
                               th:method="POST"
                               th:name="addPurchaseInPhoneCatalog">
 
-                          <input th:unless="${userUtils.containsPhoneInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+                          <input th:unless="${userUtils.containsComputerInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
                                  class="addInBookmarks btn btn-danger position-absolute bottom-0 end-0"
                                  type="submit"
                                  name="addToList" value="Add to List"/>
-                          <input th:if="${userUtils.containsPhoneInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+                          <input th:if="${userUtils.containsComputerInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
                                  class="addInBookmarks btn btn-success disabled position-absolute bottom-0 end-0"
                                  type="submit"
                                  name="addToList" value="Added"/>

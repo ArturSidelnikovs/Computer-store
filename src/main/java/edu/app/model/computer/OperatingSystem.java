@@ -1,4 +1,4 @@
-package edu.app.model.phone;
+package edu.app.model.computer;
 
 public enum OperatingSystem {
      MACOS, WINDOWS;

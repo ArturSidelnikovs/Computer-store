@@ -1,0 +1,289 @@
+<html xmlns:th="http://www.thymeleaf.org/" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Phone</title>
+    <link rel="stylesheet" th:href="@{/css/computers/showPhone.css}">
+</head>
+<body>
+<header th:insert="fragments/header :: navigationBar"></header>
+<div class="container ">
+    <div class="row justify-content-left mb-2 ">
+        <div class="col-3 " style="margin-top: 80px">
+            <img th:src="@{${computer.getImg()}}" class="popup" width="300" height="300" alt="Image"
+                 style="cursor: pointer"/>
+        </div>
+        <div class="col-9">
+            <div class="row justify-content-centre ">
+                <div class="col-8">
+                    <h1 th:text="${computer.getName()}" style="margin-top: 80px; margin-left: 100px"></h1>
+                </div>
+                <div  class="col d-flex justify-content-end" style="margin-top: 80px; margin-right: 60px;"
+                      sec:authorize="hasRole('ROLE_USER')">
+                    <form th:method="POST" th:action="@{/templates/computers/bookmark/{id}(id=${computer.id})}">
+                        <button th:unless="${userUtils.containsComputerInBookmark(#authentication.getPrincipal().getUser().getBookmarks(),
+                        computer.getId())}" class="addBookmark" style="border:none;background-color: white" type="submit">
+                            <span id="bookmarkStarGray">&#9734;</span>
+                            <span style="margin-left: 12px" id="NotInBookmarks">Not in bookmarks</span>
+                        </button>
+                    </form>
+                    <form th:method="DELETE" th:action="@{/templates/computers/bookmark/{id}(id=${computer.id},from='showComputer')}">
+                        <button th:if="${userUtils.containsComputerInBookmark(#authentication.getPrincipal().getUser().getBookmarks(),
+                        computer.getId())}" class="deleteBookmark" style="border:none;background-color: white"
+                                type="submit">
+                            <span id="bookmarkStarBright">&#9734;</span>
+                            <span style="margin-left: 12px" id="InBookmarks">In bookmarks</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+
+                    <h6 th:text="${computer.getOs()+',screen '+computer.getScreenSize()+', '+computer.getScreenTechnology()+', '+computer.getProcessor()+', RAM '
+                + computer.getRandomAccessMemory()+' Gb, '+'camera '+computer.getNumberOfMatrixPoints()+' Mp, accumulator '+computer.getAccumulatorCapacity()}"
+                        style="margin-top: 120px"></h6>
+                </div>
+
+            </div>
+            <div class="row ">
+                <div class="col-1">
+                    <h3 th:text="${computer.getPrice()} + '$'" style="margin-top: 30px"></h3>
+                </div>
+                <div class="col-2" sec:authorize="isAuthenticated() and !hasRole('ROLE_ADMIN')">
+                    <form th:action="@{/profile/{id}(id=${computer.getId()},requestFrom='showComputer')}" th:method="POST"
+                          th:name="addPurchaseInComputerCatalog">
+                        <input th:unless="${userUtils.containsComputerInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+                               class="addButtonInShowComputer btn btn-danger" type="submit" name="addToList"
+                               value="Add to List"/>
+                        <input th:if="${userUtils.containsComputerInPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders(),computer.getId())}"
+                               class="addButtonInShowComputer btn btn-success disabled" type="submit" name="addToList"
+                               value="Added"/>
+                    </form>
+                </div>
+                <div class="col-2" sec:authorize="hasRole('ROLE_ADMIN')" style="margin-top: 30px">
+                    <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                            data-bs-target="#addImage" data-bs-whatever="@mdo" style="margin-left: 30px">Add image
+                    </button>
+                    <div class="modal fade" id="addImage" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Link for image</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <form th:action="@{/templates/computers/{id}(id=${computer.getId()})}" th:method="POST">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="computerImage" class="form-label">Phone image</label>
+                                            <input name="imageLink" type="text" class="form-control" id="computerImage"
+                                                   placeholder="computerImage" th:value="${imageLink}">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Add
+                                            image
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2" style="margin-top: 30px" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form th:action="@{/templates/computers/{id}/updatePhone(id=${computer.getId()})}" th:method="GET"
+                          th:name="update">
+                        <input class="btn btn-primary" type="submit" name="info" value="Update"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <hr style="margin-top: 20px">
+    </div>
+    <div class="row">
+        <div class="ImagesShow col">
+            <th:block th:each="image :${computer.getImages()}">
+                <img th:src="@{${image}}"
+                     class="img-thumbnail popup" alt="image" width="100" height="100" style="cursor: pointer">
+
+            </th:block>
+        </div>
+        <hr style="margin-top: 20px">
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-2">
+                    <h2>Description</h2>
+                </div>
+                <div class="col-7">
+                    <p class="infoRawInShowComputer" sec:authorize="isAnonymous()">If you want to buy phones in our
+                        store,please <a
+                                class="infoLinkInShow" th:href="@{/login}">login</a>,or
+                        make a <a class="infoLinkInShow" th:href="@{/registration}">registration</a> in out store.
+                    </p>
+                </div>
+
+
+            </div>
+            <table class="table  table-borderless">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Main characteristics</h5>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Operating system</td>
+                    <td th:text="${computer.getOs()}">operatingSystem</td>
+                </tr>
+                <tr>
+                    <td>Screen size</td>
+                    <td th:text="${computer.getScreenSize()} +''">screenSize</td>
+                </tr>
+                <tr>
+                    <td>RAM</td>
+                    <td th:text="${computer.getRandomAccessMemory() + ' Gb'}">ram</td>
+                </tr>
+                <tr>
+                    <td>Number of cameras</td>
+                    <td th:text="${computer.getNumberOfMainCameras()}">Number of cameras</td>
+                </tr>
+                <tr>
+                    <td>Number of matrix points</td>
+                    <td th:text="${computer.getNumberOfMatrixPoints()+' Mp'}">Number of matrix points</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Processor</h5>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Processor</td>
+                    <td th:text="${computer.getProcessor()}">processor</td>
+                </tr>
+                <tr>
+                    <td>CPU clock speed</td>
+                    <td th:text="${computer.getCpuClockSpeed() +' Mgh'}">cpuClockSpeed</td>
+                </tr>
+                <tr>
+                    <td>Graphics accelerator</td>
+                    <td th:text="${computer.getGraphicsAccelerator()}">graphicsAccelerator</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Design</h5>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Body material</td>
+                    <td th:text="${computer.getBodyMaterial()}">Body material</td>
+                </tr>
+                <tr>
+                    <td>Back cover material</td>
+                    <td th:text="${computer.getBackCoverMaterial()}">Back cover material</td>
+                </tr>
+                <tr>
+                    <td>Body color</td>
+                    <td th:text="${computer.getBodyColor()}">Body color</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Size and weight</h5>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Length</td>
+                    <td th:text="${computer.getLength()+' mm'}">length</td>
+                </tr>
+                <tr>
+                    <td>Width</td>
+                    <td th:text="${computer.getWidth()} + ' mm'">width</td>
+                </tr>
+                <tr>
+                    <td>Thickness</td>
+                    <td th:text="${computer.getThickness() +' mm'}">thickness</td>
+                </tr>
+                <tr>
+                    <td>Weight</td>
+                    <td th:text="${computer.getWeight()} +' gr'">weight</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Screen</h5>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Screen technology</td>
+                    <td th:text="${computer.getScreenTechnology()}">screen technology</td>
+                </tr>
+                <tr>
+                    <td>Screen refresh rate</td>
+                    <td th:text="${computer.getScreenRefreshRate()}">screen refresh rate</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Accumulator</h5>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Accumulator capacity</td>
+                    <td th:text="${computer.getAccumulatorCapacity()}">accumulatorCapacity</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>
+                        <h5>Interfaces</h5>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Wi-fi</td>
+                    <td th:text="${computer.getWifi()}">wifi</td>
+                </tr>
+                <tr>
+                    <td>Connection connector</td>
+                    <td th:text="${computer.getConnectionConnector()}">connectionConnector</td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <span style="font-size: 15px;opacity: .5;margin-bottom: 30px">The above information was obtained from open sources, including from official sites and from catalogs of manufacturers.
+                <br/>
+               When receiving an order,Always pay attention to the parameters and characteristics of the purchases goods that are important for you.
+                <br/>
+               All materials ,published in this catalog are the property of Computer Store,any publication or copying(full or partial) without prior consent is prohibited.
+            </span>
+        </div>
+    </div>
+
+</div>
+<!--Modal-->
+<div class="modal fade modal-img" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <img id="popup-img" src="" alt="image">
+        </div>
+    </div>
+</div>
+<footer th:insert="fragments/footer :: footer"></footer>
+<script th:src="@{/js/showComputer.js}"></script>
+</body>
+</html>

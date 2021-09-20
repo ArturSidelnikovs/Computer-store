@@ -2,7 +2,7 @@ package edu.app.util.userUtils;
 
 import edu.app.model.Order.Order;
 import edu.app.model.Order.OrderState;
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import edu.app.util.orderUtils.OrderUtils;
 import org.springframework.stereotype.Component;
 
@@ -39,11 +39,11 @@ public class UserUtils {
     }
 
 
-    public boolean containsPhoneInPreparatoryOrder(List<Order> orders, long id) {
+    public boolean containsComputerInPreparatoryOrder(List<Order> orders, long id) {
 
         return orders.stream().filter(order2 -> OrderState.PREPARATORY.equals(order2.getState()))
                 .findFirst()
-                .map(order1 -> orderUtils.containsPhone(order1.getComputers(), id))
+                .map(order1 -> orderUtils.containsComputer(order1.getComputers(), id))
                 .orElse(false);
     }
 
@@ -70,10 +70,10 @@ public class UserUtils {
     }
 
     public void deleteFromBookmarks(List<Computer> computers, long id) {
-        computers.removeIf(phone -> phone.getId() == id);
+        computers.removeIf(computer -> computer.getId() == id);
     }
 
-    public boolean containsPhoneInBookmark(List<Computer> computers, long id) {
-        return computers.stream().anyMatch(phone -> phone.getId() == id);
+    public boolean containsComputerInBookmark(List<Computer> computers, long id) {
+        return computers.stream().anyMatch(computer -> computer.getId() == id);
     }
 }

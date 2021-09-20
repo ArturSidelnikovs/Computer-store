@@ -1,6 +1,6 @@
 package edu.app.util.orderUtils;
 
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -16,13 +16,13 @@ public class OrderUtils {
     }
 
 
-    public void addPhone(List<Computer> computers, Computer computer) {
+    public void addComputer(List<Computer> computers, Computer computer) {
         computers.add(computer);
     }
 
 
-    public boolean containsPhone(List<Computer> computers, long id) {
-        Computer computer2 = computers.stream().filter(phone -> phone.getId() == id)
+    public boolean containsComputer(List<Computer> computers, long id) {
+        Computer computer2 = computers.stream().filter(computer -> computer.getId() == id)
                 .findFirst()
                 .orElse(null);
 
@@ -30,7 +30,7 @@ public class OrderUtils {
     }
 
 
-    public void deletePhone(List<Computer> computers, long id) {
+    public void deleteComputer(List<Computer> computers, long id) {
         for (Computer computer : computers) {
             if (computer.getId() == id) {
                 computers.remove(computer);
@@ -40,8 +40,8 @@ public class OrderUtils {
     }
 
 
-    public void deleteAllPhones(List<Computer> computers, long id) {
-        computers.removeIf(phone -> phone.getId() == id);
+    public void deleteAllComputers(List<Computer> computers, long id) {
+        computers.removeIf(computer -> computer.getId() == id);
 
     }
 
@@ -61,7 +61,7 @@ public class OrderUtils {
     }
 
 
-    public Map<String, Map<Computer, Integer>> convertListOfPhonesIntoMap(List<Computer> userComputers) {
+    public Map<String, Map<Computer, Integer>> convertListOfComputersIntoMap(List<Computer> userComputers) {
         Map<String, Map<Computer, Integer>> phones = new HashMap<>();
         for (Computer computer : userComputers) {
             Map<Computer, Integer> s = new HashMap<>();

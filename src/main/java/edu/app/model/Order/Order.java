@@ -1,6 +1,6 @@
 package edu.app.model.Order;
 
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import edu.app.model.user.User;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

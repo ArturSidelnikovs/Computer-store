@@ -1,6 +1,6 @@
 package edu.app.service.impl;
 
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import edu.app.repository.computerRepository.ComputerRepository;
 import edu.app.service.IService;
 import org.slf4j.Logger;
@@ -38,15 +38,15 @@ public class ComputerService implements IService<Computer> {
     @Override
     @Transactional(readOnly = true)
     public Page<Computer> findAllWithPagination(Pageable pageable) {
-        Page<Computer> phones = computerRepository.findAll(pageable);
-        logger.info("All phones in db was successfully found");
-        return phones;
+        Page<Computer> computers = computerRepository.findAll(pageable);
+        logger.info("All computers in db was successfully found");
+        return computers;
     }
 
 
     @Override
-    public Computer save(Computer phone) {
-        Computer computerToDb = computerRepository.save(phone);
+    public Computer save(Computer computer) {
+        Computer computerToDb = computerRepository.save(computer);
         logger.info("Computer {} was successfully added to db", computerToDb.getId());
         return computerToDb;
     }

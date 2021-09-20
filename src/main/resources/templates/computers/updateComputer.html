@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>UpdatePhone</title>
+    <title>UpdateComputer</title>
     <style>
         body:not(.container) {
             background-color: #e3e3e3;
@@ -16,33 +16,33 @@
         <div class="col-5 " style="margin-top: 56px">
             <div class="card">
                 <div class="card-body">
-                    <form th:method="PUT" th:action="@{/computers/{id}(id=${computer.id})}" th:object="${computer}">
+                    <form th:method="PUT" th:action="@{/templates/computers/{id}(id=${computer.id})}" th:object="${computer}">
                         <div class="mb-3">
-                            <label for="PhoneName" class="form-label" style="font-weight: bold">Phone name: </label>
-                            <input name="name" type="text" class="form-control" id="PhoneName"
+                            <label for="ComputerName" class="form-label" style="font-weight: bold">Phone name: </label>
+                            <input name="name" type="text" class="form-control" id="ComputerName"
                                    aria-describedby="emailHelp" placeholder="Name" th:field="*{name}">
                             <span style="color: darkred" th:errors="*{name}"></span>
                         </div>
                         <div class="mb-3">
-                            <label for="PhonePrice" class="form-label" style="font-weight: bold">Price of the computer:
+                            <label for="ComputerPrice" class="form-label" style="font-weight: bold">Price of the phone:
                                 <span style="font-weight: normal"> (You have to use Double.Example: 780 or 567.2)</span>
                             </label>
-                            <input name="phonePrice: " type="text" class="form-control" id="PhonePrice"
+                            <input name="ComputerPrice:" type="text" class="form-control" id="ComputerPrice"
                                    placeholder="Price"
                                    th:field="*{price}">
                             <span style="color: darkred" th:errors="*{price}"></span>
                         </div>
                         <div class="mb-3">
-                            <label for="PhoneProcessor" class="form-label" style="font-weight: bold">Processor
+                            <label for="ComputerProcessor" class="form-label" style="font-weight: bold">Processor
                                 <span style="font-weight: normal">(You have to use String.Example:" Snapdragon 888")</span></label>
-                            <input name="processor" type="text" class="form-control" id="PhoneProcessor"
+                            <input name="processor" type="text" class="form-control" id="ComputerProcessor"
                                    placeholder="Processor" th:field="*{processor}">
                             <span style="color: darkred" th:errors="*{processor}"></span>
                         </div>
                         <div class="mb-3">
-                            <label for="PhoneImg" class="form-label" style="font-weight: bold">Image
+                            <label for="ComputerImg" class="form-label" style="font-weight: bold">Image
                                 <span style="font-weight: normal">(You have to add link to image)</span></label>
-                            <input name="image" type="text" class="form-control" id="PhoneImg" placeholder="ImageLink"
+                            <input name="image" type="text" class="form-control" id="ComputerImg" placeholder="ImageLink"
                                    th:field="*{img}">
                             <span style="color: darkred" th:errors="*{img}"></span>
                         </div>
@@ -85,14 +85,6 @@
                             <input name="numberOfMatrixPoints" type="text" class="form-control"
                                    id="numberOfMatrixPoints" placeholder="numberOfMatrixPoints"
                                    th:field="*{numberOfMatrixPoints}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="numberOfSimCards" class="form-label" style="font-weight: bold">Number of sim
-                                cards
-                                <span style="font-weight: normal"> (You have to use Integer.Example: 2)</span></label>
-                            <input name="numberOfSimCards" type="text" class="form-control" id="numberOfSimCards"
-                                   placeholder="numberOfSimCards"
-                                   th:field="*{getSsdCapacity}">
                         </div>
                         <div class="mb-3">
                             <label for="cpuClockSpeed" class="form-label" style="font-weight: bold">Cpu clock speed
@@ -187,13 +179,6 @@
                             <input name="accumulatorCapacity" type="text" class="form-control" id="accumulatorCapacity"
                                    placeholder="accumulatorCapacity"
                                    th:field="*{accumulatorCapacity}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="accumulatorType" class="form-label" style="font-weight: bold">Accumulator type
-                                <span style="font-weight: normal"> (You have to use String.Example:"Li-ion")</span></label></label>
-                            <input name="accumulatorType" type="text" class="form-control" id="accumulatorType"
-                                   placeholder="accumulatorType"
-                                   th:field="*{accumulatorType}">
                         </div>
                         <div class="mb-3">
                             <label for="wifi" class="form-label" style="font-weight: bold">Wi-fi

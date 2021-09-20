@@ -13,7 +13,7 @@
     <div class="col">
       <div th:class="h1">Purchase list</div>
 
-      <span id="phoneSum" th:unless="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
+      <span id="Sum" th:unless="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
            userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders()).getComputers().isEmpty()}"></span>
       <img class="rounded mx-auto d-block"
            th:if="${userUtils.getPreparatoryOrder(#authentication.getPrincipal().getUser().getOrders())==null ||
@@ -62,13 +62,13 @@
 
               </td>
               <td>
-                <form th:action="@{/profile/{id}/allPhones(id=${computer2.getKey().getId()})}"
+                <form th:action="@{/profile/{id}/allComputers(id=${computer2.getKey().getId()})}"
                       th:method="DELETE"
                       th:name="garbageIconInPurchaseList">
 
 
                   <input type="image" th:src="@{/img/profile/garbageIcon.png}" alt="garbageIcon"
-                         width="30" height="30" id="deleteFromPurchaseListAllCurrentPhones"/>
+                         width="30" height="30" id="deleteFromPurchaseListAllCurrentComputers"/>
                 </form>
               </td>
             </tr>

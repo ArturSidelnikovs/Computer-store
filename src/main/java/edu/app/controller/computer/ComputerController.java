@@ -1,9 +1,9 @@
-package edu.app.controller.phone;
+package edu.app.controller.computer;
 
 import edu.app.config.security.SecurityUser;
-import edu.app.model.phone.Computer;
-import edu.app.model.phone.OperatingSystem;
-import edu.app.model.phone.ScreenTechnology;
+import edu.app.model.computer.Computer;
+import edu.app.model.computer.OperatingSystem;
+import edu.app.model.computer.ScreenTechnology;
 import edu.app.model.user.User;
 import edu.app.service.IService;
 import edu.app.service.userService.IUserService;
@@ -50,8 +50,8 @@ public class ComputerController {
     }
 
     @GetMapping()
-    public String phoneList(Model model,
-                            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String computerList(Model model,
+                               @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Computer> computers = computerIService.findAllWithPagination(pageable);
         int[] body = pagination(computers);
         model.addAttribute("computers", computers);
@@ -60,16 +60,16 @@ public class ComputerController {
         model.addAttribute("userUtils", userUtils);
 
 
-        return "computerCatalog";
+        return "computers/computerCatalog";
     }
 
     @GetMapping("/{id}")
-    public String phonePage(@PathVariable("id") int id, Model model) {
+    public String computerPage(@PathVariable("id") int id, Model model) {
         model.addAttribute("computer", computerIService.findById(id));
         model.addAttribute("imageLink", "");
         model.addAttribute("userUtils", userUtils);
 
-        return "showComputer";
+        return "computers/showComputer";
     }
 
     @GetMapping("/new")
@@ -78,7 +78,7 @@ public class ComputerController {
         model.addAttribute("newComputer", new Computer());
         model.addAttribute("os", OperatingSystem.values());
         model.addAttribute("screenTech", ScreenTechnology.values());
-        return "newComputer";
+        return "computers/newComputer";
     }
 
     @PostMapping
@@ -88,7 +88,7 @@ public class ComputerController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("os", OperatingSystem.values());
             model.addAttribute("screenTech", ScreenTechnology.values());
-            return "newComputer";
+            return "computers/newComputer";
         }
         computerIService.save(computer);
         return "redirect:/computers";
@@ -109,7 +109,7 @@ public class ComputerController {
         model.addAttribute("computer", computerIService.findById(id));
         model.addAttribute("os", OperatingSystem.values());
         model.addAttribute("screenTech", ScreenTechnology.values());
-        return "updateComputer";
+        return "computers/updateComputer";
     }
 
     @PutMapping("/{id}")
@@ -120,7 +120,7 @@ public class ComputerController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("os", OperatingSystem.values());
             model.addAttribute("screenTech", ScreenTechnology.values());
-            return "updateComputer";
+            return "computers/updateComputer";
         }
         computerIService.save(computer);
         return "redirect:/computers";
@@ -170,18 +170,18 @@ public class ComputerController {
     }
 
 
-    private int[] pagination(Page<Computer> phones) {
+    private int[] pagination(Page<Computer> computers) {
         int[] body;
-        int maxPhonePages = 7;
+        int maxComputerPages = 7;
         int headMaxPage = 4;
         int bodyBeforeMaxPage = 4;
         int bodyAfterMaxPages = 2;
         int bodyCenterMaxPage = 3;
 
 
-        if (phones.getTotalPages() > maxPhonePages) {
-            int totalPages = phones.getTotalPages();
-            int pageNumber = phones.getNumber() + 1; //Отображаемый индекс страницы на единицу больше,чем тот,что мы имеем в коде.
+        if (computers.getTotalPages() > maxComputerPages) {
+            int totalPages = computers.getTotalPages();
+            int pageNumber = computers.getNumber() + 1; //Отображаемый индекс страницы на единицу больше,чем тот,что мы имеем в коде.
 
             /*If current page greater than headMaxPage ,than we display page one and minus one,else we display pages one,two three.*/
             int[] head = (pageNumber > headMaxPage) ? new int[]{1, -1} : new int[]{1, 2, 3};
@@ -198,8 +198,8 @@ public class ComputerController {
 
             body = merge(head, bodyBefore, bodyCenter, bodyAfter, tail);
         } else {
-            body = new int[phones.getTotalPages()];
-            for (int i = 0; i < phones.getTotalPages(); i++) {
+            body = new int[computers.getTotalPages()];
+            for (int i = 0; i < computers.getTotalPages(); i++) {
                 body[i] = i + 1;
             }
         }

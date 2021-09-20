@@ -1,7 +1,7 @@
 package edu.app.model.user;
 
 import edu.app.model.Order.Order;
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;

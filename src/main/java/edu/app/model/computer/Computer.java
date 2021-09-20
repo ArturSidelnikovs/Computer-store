@@ -1,4 +1,4 @@
-package edu.app.model.phone;
+package edu.app.model.computer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

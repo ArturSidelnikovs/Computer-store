@@ -1,6 +1,6 @@
 package edu.app.controller.home;
 
-import edu.app.model.phone.Computer;
+import edu.app.model.computer.Computer;
 import edu.app.service.IService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

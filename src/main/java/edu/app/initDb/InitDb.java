@@ -1,6 +1,6 @@
 package edu.app.initDb;
 
-import edu.app.initDb.initPhones.InitComputers;
+import edu.app.initDb.initComputers.InitComputers;
 import edu.app.initDb.initUsers.InitUsers;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ public class InitDb {
 
     public void initDb(ConfigurableApplicationContext context) {
         if (initDb.equals("true")) {
-            initComputers.initPhones();
+            initComputers.initComputers();
             initUsers.initUsers(context);
         }
     }

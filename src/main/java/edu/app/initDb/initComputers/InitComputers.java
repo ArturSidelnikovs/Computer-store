@@ -1,8 +1,8 @@
-package edu.app.initDb.initPhones;
+package edu.app.initDb.initComputers;
 
-import edu.app.model.phone.Computer;
-import edu.app.model.phone.OperatingSystem;
-import edu.app.model.phone.ScreenTechnology;
+import edu.app.model.computer.Computer;
+import edu.app.model.computer.OperatingSystem;
+import edu.app.model.computer.ScreenTechnology;
 import edu.app.service.IService;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class InitComputers {
         this.service = service;
     }
 
-    public void initPhones() {
+    public void initComputers() {
         List<Computer> list = new ArrayList<>();
         Computer computer1 = new Computer();
         computer1.setName("Ноутбук Apple MacBook Air 13 2020 MWTJ2");
@@ -259,11 +259,11 @@ public class InitComputers {
 
         list.add(computer8);
 
-        savePhones(list);
+        saveComputers(list);
 
     }
 
-    private void savePhones(List<Computer> computers) {
+    private void saveComputers(List<Computer> computers) {
         computers.forEach(service::save);
     }
 }
